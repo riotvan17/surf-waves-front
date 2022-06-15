@@ -14,7 +14,6 @@ from streamlit_kpi_metric import metric_row
 
 # Use the full page instead of a narrow central column
 st.set_page_config(layout="wide",page_title='SurfWaves Project',page_icon=':surfer:')
-# st.image('The-great-wave.jpg',use_column_width='always')
 st.title("""SURFWAVES PROJECT :surfer:""")
 
 
@@ -31,20 +30,15 @@ api_input = st.sidebar.selectbox(
 )
 
 if api_input == 'DePanne':
-    # st.sidebar.write(f'You choose {api_input}')
     st.sidebar.markdown('''<h4 style='text-align: justify; color: black;'>It is
                         situated close to the border with France in the south-west
                         of Belgian coast. Known for its elongated dunes,
                         the Panne is the place of birth of beach sailing.</h4>
                         ''', unsafe_allow_html=True)
     st.sidebar.write('                                   ')
-    # st.sidebar.write('''It is situated close to the border
-    #                  with France in the south-west of Belgian coast.
-    #                  Known for its elongated dunes, the Panne is the place of birth of beach sailing.''')
     st.sidebar.image('DePanne_blue.jpg',use_column_width='always')
     st.sidebar.write('                                   ')
 elif api_input == 'Oostend':
-    # st.sidebar.write(f'You choose {api_input}')
     st.sidebar.write('''<h4 style='text-align: justify; color: black;'> As Belgium’s largest coastal outpost, Ostend offers a rare taste of Flemish beach culture.
                      Inland visitors flock to sandy beaches and the seaside promenade, while
                      reminders of the city’s military and maritime history run deep in the old harbor town.</h4>
@@ -53,7 +47,6 @@ elif api_input == 'Oostend':
     st.sidebar.image('oostend_blue.jpg',use_column_width='always')
     st.sidebar.write('                                   ')
 else:
-    # st.sidebar.write(f'You choose {api_input}')
     st.sidebar.write('''<h4 style='text-align: justify; color: black;'>
                      Knokke is the most north-eastern seaside resort on the Belgian coast.
                      It lies adjacent to the Dutch border;
@@ -64,11 +57,6 @@ else:
     st.sidebar.image('knokke.jpg',use_column_width='always')
     st.sidebar.write('                                   ')
 
-
-
-# col1, col2 = st.columns(2)
-
-
 # --------------------- Left Column Section/Column1------------------#
 
 #Add a time stamp selection
@@ -78,8 +66,6 @@ timestamp =pd.to_datetime(now)
 # Print the current date only
 today = date.today()
 tomorrow = today + timedelta(1)
-
-
 
 # --------------------- API loading------------------#
 
@@ -103,24 +89,6 @@ def get_prediction():
         # -----------------------Add a bar progess -----------------------------------#
     return api
 
-
-# latest_iteration = st.empty()
-#     bar = st.progress(0)
-#     for i in range(100):
-#             # Update the progress bar with each iteration.
-#             if i<26:
-#                 latest_iteration.text('Uploading progression: getting wind direction')
-#             elif 25 < i < 51:
-#                 latest_iteration.text('Uploading progression: getting tide level')
-#             elif 50 < i < 76:
-#                 latest_iteration.text('Uploading progression: getting wind speed')
-#             elif 75 < i < 98:
-#                 latest_iteration.text('Uploading progression: getting forecasting')
-#             else:
-#                 latest_iteration.text('Uploading done')
-#             bar.progress(i + 1)
-#             time.sleep(0.1)
-
 if st.sidebar.button('Click to see the result'):
 
     api = get_prediction()
@@ -129,7 +97,6 @@ if st.sidebar.button('Click to see the result'):
 
 
 #------------------------- Real time information --------------------------------#
-    # col1.metric(label="The wind speed in m/s", value=api['wind_speed'])
     st.markdown('---------------------------------------------------------------')
     st.markdown(f"<h3 style='text-align: center; color: black;'> Forecast for {today}</h3>", unsafe_allow_html=True )
     st.markdown('---------------------------------------------------------------')
@@ -141,8 +108,6 @@ if st.sidebar.button('Click to see the result'):
         api['tide'] = 'Middle Tide'
     else:
         api['tide'] = 'High Tide'
-
-    # col1.metric(label="We have a", value=api['tide'])
 
     #categorize the wind direction
     if api['wind_direction'] >= 348.75:
@@ -196,10 +161,6 @@ if st.sidebar.button('Click to see the result'):
     elif api['wind_direction'] >= 326.25 and api['wind_direction'] < 348.75:
         api['wind_direction'] = 'NNW'
 
-
-    # col1.metric(label="The direction of the wind is:", value=api['wind_direction'])
-    # prediction = api['wave_height']
-    # pred = st.write(f"<div style='color: blue'> {prediction} </div>", unsafe_allow_html=True)
     metric_row(
             {
                 "The direction of the wind": api['wind_direction'],
@@ -210,13 +171,6 @@ if st.sidebar.button('Click to see the result'):
     metric_row(
         {"prediction for the height": api['wave_height']}
     )
-
-#--------------------Add the prediction ----------------------------------------
-    # prediction = api['wave_height']
-    # st.markdown('---------------------------------------------------------------')
-    # st.markdown(f"<h4 style='text-align: center; color: black;'>Our prediction for the height is {prediction} cm for the {today} at {now.hour}:{now.minute}</h4>", unsafe_allow_html=True)
-    # st.markdown('''---------------------------------------------------------------''')
-    # st.info(f"Our prediction for the height is {prediction} cm for the {today} at {now.hour}:{now.minute}")
 
 #-------------------------Add forecast------------------------------------------
     st.markdown('''---------------------------------------------------------------''')
@@ -244,15 +198,11 @@ if st.sidebar.button('Click to see the result'):
 
     with im3:
             st.write('       ')
-#
-
-
 
 #--------------------------- End of for loop -----------------------------------
 
 else:
     st.write('👈 **Choose your location and click on the button on the sidebar to see if it is a good day to go surfing**')
-
 
 #-------------------------------Background image--------------------------------
 import base64
@@ -286,6 +236,4 @@ def background_image_style(path):
 image_path = 'pexels-negative-space-127582.jpg'
 image_link = 'https://docs.python.org/3/'
 
-
-# st.write(f'<a href="{image_link}">{image_tag(image_path)}</a>', unsafe_allow_html=True)
 st.write(background_image_style(image_path), unsafe_allow_html=True)

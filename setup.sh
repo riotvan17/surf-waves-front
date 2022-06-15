@@ -1,7 +1,5 @@
 mkdir -p ~/.streamlit/
 
-HEROKU_EMAIL_ADDRESS = lienchi.le2@gmail.com
-
 echo "\
 [general]\n\
 email = \"${HEROKU_EMAIL_ADDRESS}\"\n\
