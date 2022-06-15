@@ -1,0 +1,4 @@
+make: Entering directory `/Users/riotvan/code/riotvan17/surf-waves-front'
+pip install -r requirements.txt
+make: Leaving directory `/Users/riotvan/code/riotvan17/surf-waves-front'
+ 
